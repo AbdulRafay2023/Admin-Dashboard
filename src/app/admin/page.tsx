@@ -3,8 +3,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { Card, CardContent } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+
 
 type post = {
   id: number
@@ -37,7 +40,7 @@ export default function AdminPage() {
       alert('Post deleted successfully!')
     },
   })
-
+  const router = useRouter()
 
   if (isLoading) return <div className="text-center py-10">🔄 Loading posts...</div>
   if (error) return <div className="text-center text-red-500 py-10">❌ Failed to load posts</div>
@@ -45,38 +48,49 @@ export default function AdminPage() {
   return (
     <>
       <div className='max-w-6xl mx-auto p-6 space-y-4'>
-        <h1 className='text-2xl font-bold mb-4'>Admin All post</h1>
+        <h1 className=' inline-block text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>All posts</h1>
+        <div className=" top-4 right-4">
+          <button
+            className="absolute top-4 right-4 hover:cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            onClick={() => router.back()}
+          >
+            Back
+          </button>
+        </div>
+        <Link href="/admin/create">
+          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create New Post</button>
+        </Link>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {posts?.map((post) => (
-            <Card key={post.id}>
-              <CardContent className="p-4">
-                <h2 className="font-semibold text-lg">{post.title}</h2>
-                <p className="text-gray-600 text-sm mt-1">
-                  {post.body.slice(0, 80)}...
-                </p>
-                <Link href={`/admin/edit/${post.id}`}
-                  className="text-blue-600 underline mt-2 block">
-                  Edit
-                </Link>
-                <button className='bg-red-500 px-2 py-1 mt-2 text-white rounded-2xl'
-                  onClick={() => {
-                    const confirmDelete = confirm('Are you sure you want to delete this post?')
-                    if (confirmDelete) {
-                      deletePost.mutate(post.id)
-                    }
-                  }}
-                >
-                  Delete
-                </button>
+            <BackgroundGradient key={post.id}>
+              <Card >
+                <CardContent className="p-4">
+                  <h2 className="font-semibold text-lg">{post.title}</h2>
+                  <p className="text-gray-600 text-sm mt-1 mb-5">
+                    {post.body.slice(0, 80)}...
+                  </p>
+                  <Link href={`/admin/edit/${post.id}`}
+                    className="text-blue-600 underline mt-6 mr-3 hover:cursor-pointer ">
+                    <Button>Edit</Button>
+                  </Link>
+                  <Button variant="destructive" className='hover:cursor-pointer'
+                    onClick={() => {
+                      const confirmDelete = confirm('Are you sure you want to delete this post?')
+                      if (confirmDelete) {
+                        deletePost.mutate(post.id)
+                      }
+                    }}
+                  >
+                    Delete
+                  </Button>
 
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </BackgroundGradient>
           ))}
         </div>
 
-        <Link href="/admin/create">
-          <Button className='mb-4'>Create new Post</Button>
-        </Link>
+
       </div>
     </>
   )

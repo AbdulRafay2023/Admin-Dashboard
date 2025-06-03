@@ -56,15 +56,16 @@ export default function EditPostPage() {
     return (
         <div className="p-4">
             <div className="absolute top-4 right-4">
-                <Button
-                    variant="outline"
-                    className="bg-white shadow-sm hover:bg-blue-400 cursor-pointer transition"
+                <button
+                    className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     onClick={() => router.back()}
                 >
-                Back
-                </Button>
+                    Back
+                </button>
             </div>
-            <h1 className="text-xl font-bold mb-4">Edit Post (Rich Text)</h1>
+            <h1 className="inline-block text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                ✏️ Edit Post
+            </h1>
             <input
                 className="border p-2 w-full mb-4"
                 value={title}

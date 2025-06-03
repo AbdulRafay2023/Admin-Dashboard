@@ -45,19 +45,26 @@ export default function CreatePostPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">📝 Create New Post</h1>
-
-      <Card>
+      <h1 className="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create New Post</h1>
+       <div className=" top-4 right-4">
+          <button
+            className="absolute top-4 right-4 hover:cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            onClick={() => router.back()}
+          >
+            Back
+          </button>
+        </div>
+      <Card className='h-100'>
         <CardContent className="space-y-4 p-4">
           <Input
             placeholder="Post title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <div className="border rounded-md p-2">
+          <div className="border h-50 rounded-md p-2">
             <EditorContent editor={editor} />
           </div>
-          <Button onClick={handleSubmit} disabled={mutation.isPending}>
+          <Button className='text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' onClick={handleSubmit} disabled={mutation.isPending}>
             {mutation.isPending ? 'Saving...' : 'Create Post'}
           </Button>
         </CardContent>
