@@ -32,5 +32,5 @@ It uses the free API from [JSONPlaceholder](https://jsonplaceholder.typicode.com
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://https://github.com/AbdulRafay2023/Admin-Dashboard.git
+cd Admin-Dashboard
